@@ -7,8 +7,19 @@ export const getGifs = async (category) => {
         const url = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${category}&limit=12&offset=0&rating=g&lang=en`;
 
         const response = await fetch(url);
-        const result = await response.json();
-        return result
+        const {data} = await response.json();
+        
+        const gifs = data.map( gif => (
+            {
+                id : gif.id,
+                title : gif.title,
+                url : gif.images.downsized_medium.url
+            }
+        ))
+        
+        
+        
+        return gifs
 
     } catch (error) {
         console.error(error);

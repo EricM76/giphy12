@@ -11,7 +11,12 @@ export const useFetchGifs = (category) => {
   useEffect(() => {
 
       getGifs(category)
-        .then( (data) => console.log(data))
+        .then( (gifs) => {
+          setState({
+            data : gifs,
+            loading : false
+          })
+        })
         .catch(error => console.error(error))
      
   }, [category]);
